@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#100817">
+<title>The Call I Never Wanted to End 💜</title>
+
+<style>
+:root {
+  --bg: #100817;
+  --panel: #1b1025;
+  --purple: #c6a0ff;
+  --pink: #f2b9d8;
+  --white: #fff8ff;
+  --muted: #b6a6c1;
+  --gold: #f0d4a0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .17;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+
+.glow-one {
+  background: #8d39c7;
+  top: -150px;
+  left: -120px;
+}
+
+.glow-two {
+  background: #d65b9f;
+  bottom: -160px;
+  right: -140px;
+  animation-delay: -5s;
+}
+
+@keyframes drift {
+  to { transform: translate(55px, 45px) scale(1.2); }
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.screen {
+  display: none;
+  min-height: 100svh;
+  padding: 35px 24px 105px;
+  max-width: 520px;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: appear .8s ease both;
+}
+
+.screen.active {
+  display: flex;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 10px;
+  color: var(--purple);
+  margin-bottom: 24px;
+}
+
+h1, h2 {
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(37px, 10vw, 54px);
+}
+
+h2 {
+  font-size: clamp(30px, 8vw, 42px);
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #e7dce9;
+}
+
+em {
+  color: var(--pink);
+}
+
+.highlight {
+  color: var(--purple);
+}
+
+.small {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.divider {
+  width: 46px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  margin: 27px auto;
+}
+
+.continue {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 24px calc(18px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, #100817 24%);
+  display: flex;
+  justify-content: center;
+}
+
+.next {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px 22px;
+  border: 1px solid #7f5b99;
+  background: rgba(48, 28, 61, .92);
+  color: var(--white);
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  transition: .25s;
+}
+
+.next:active {
+  transform: scale(.97);
+  background: #51336a;
+}
+
+/* SCREEN 1: THE CALL */
+
+.call-label {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #c5b2cf;
+  margin-bottom: 34px;
+}
+
+.call-avatar {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 27px;
+  position: relative;
+  font-size: 54px;
+  background:
+    radial-gradient(circle at 35% 25%, #69437d, #2b1938 58%, #171020);
+  box-shadow: 0 0 0 1px #78578c, 0 0 0 13px rgba(160, 111, 195, .06);
+  animation: avatarGlow 3s ease-in-out infinite;
+}
+
+.call-avatar::before,
+.call-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border: 1px solid rgba(198, 160, 255, .24);
+  border-radius: 50%;
+  animation: ring 3s ease-out infinite;
+}
+
+.call-avatar::after {
+  animation-delay: 1.5s;
+}
+
+@keyframes ring {
+  0% { transform: scale(.94); opacity: .7; }
+  100% { transform: scale(1.28); opacity: 0; }
+}
+
+@keyframes avatarGlow {
+  50% { box-shadow: 0 0 0 1px #b78bd7, 0 0 42px #8e48b74a; }
+}
+
+.call-name {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.call-subtitle {
+  font-family: Arial, sans-serif;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.call-buttons {
+  display: flex;
+  gap: 45px;
+  margin-top: 50px;
+}
+
+.call-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  border: 0;
+}
+
+.accept {
+  background: #52b98a;
+  box-shadow: 0 0 28px #52b98a36;
+  animation: acceptPulse 2s infinite;
+}
+
+.decline {
+  background: #b74863;
+  transform: rotate(135deg);
+}
+
+@keyframes acceptPulse {
+  50% { box-shadow: 0 0 0 9px #52b98a18; }
+}
+
+/* SCREEN 2: WHAT I SAW */
+
+.video-card {
+  width: 100%;
+  min-height: 340px;
+  margin: 25px 0;
+  border: 1px solid #50345e;
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 50% 20%, #50305e 0%, transparent 55%),
+    linear-gradient(160deg, #24162e, #140d1c 75%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 23px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-top, .video-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: #d5c5dc;
+  letter-spacing: 1px;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f18cae;
+  margin-right: 6px;
+  box-shadow: 0 0 10px #f18cae;
+}
+
+.video-center {
+  padding: 28px 0;
+}
+
+.video-heart {
+  font-size: 56px;
+  animation: heartbeat 2s infinite;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 20px #d77ac355);
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10% { transform: scale(1.12); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.08); }
+}
+
+.video-center h3 {
+  font-weight: normal;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.video-center p {
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+.video-controls {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.control {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff13;
+  display: grid;
+  place-items: center;
+  font-family: Arial, sans-serif;
+}
+
+/* SCREEN 3: THE LITTLE THINGS */
+
+.memory-list {
+  width: 100%;
+  margin-top: 30px;
+  text-align: left;
+}
+
+.memory {
+  display: flex;
+  gap: 17px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #ffffff12;
+}
+
+.memory-icon {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #ffffff0a;
+  border: 1px solid #ffffff10;
+  font-size: 19px;
+}
+
+.memory h3 {
+  font-weight: normal;
+  color: var(--pink);
+  font-size: 18px;
+  margin-bottom: 7px;
+}
+
+.memory p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* SCREEN 4: THE FUTURE */
+
+.future-card {
+  width: 100%;
+  margin-top: 28px;
+  padding: 30px 23px;
+  border-radius: 20px;
+  border: 1px solid #70537e;
+  background: linear-gradient(145deg, #291835, #171020);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.future-card::after {
+  content: "∞";
+  position: absolute;
+  right: 10px;
+  bottom: -46px;
+  font-size: 140px;
+  color: #c6a0ff0b;
+}
+
+.future-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.future-tag {
+  display: inline-block;
+  padding: 7px 10px;
+  border: 1px solid #84659b;
+  border-radius: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--purple);
+  margin-bottom: 22px;
+}
+
+/* SCREEN 5: THE LETTER */
+
+.letter {
+  width: 100%;
+  text-align: left;
+  padding: 27px 23px;
+  margin-top: 26px;
+  border: 1px solid #62496d;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #20152a, #170f20);
+  box-shadow: 0 20px 70px #00000025;
+}
+
+.letter p {
+  font-size: 15px;
+  line-height: 2;
+  margin-bottom: 19px;
+}
+
+.signature {
+  margin-top: 27px;
+  color: var(--pink);
+  font-size: 28px;
+  line-height: 1.5;
+}
+
+.signature small {
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* SCREEN 6: DUA */
+
+.dua-card {
+  padding: 31px 23px;
+  width: 100%;
+  margin: 25px 0;
+  border-radius: 22px;
+  background: linear-gradient(140deg, #291b33, #17101e);
+  border: 1px solid #654a72;
+}
+
+.arabic {
+  direction: rtl;
+  font-size: 28px;
+  line-height: 2;
+  color: #f0d6a8;
+  margin-bottom: 24px;
+}
+
+.dua-translation {
+  font-size: 15px;
+  line-height: 1.9;
+  font-style: italic;
+}
+
+.amen {
+  color: var(--pink);
+  font-size: 32px;
+  margin-top: 20px;
+}
+
+/* SCREEN 7: END */
+
+.final-heart {
+  font-size: 70px;
+  margin: 25px 0;
+  animation: heartbeat 2s infinite;
+  filter: drop-shadow(0 0 20px #d77ac344);
+}
+
+.final-line {
+  font-size: 20px;
+  line-height: 1.9;
+  max-width: 350px;
+  margin: 20px auto;
+}
+
+.replay {
+  margin-top: 24px;
+  padding: 13px 20px;
+  border: 1px solid #77558d;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--purple);
+  font-family: Arial, sans-serif;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+
+.progress {
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ffffff0b;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #a66de4, #f2b9d8);
+  transition: width .5s;
+}
+
+.page-count {
+  position: fixed;
+  z-index: 5;
+  top: 18px;
+  right: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #9c89aa;
+}
+
+@media (max-height: 700px) {
+  .screen { padding-top: 45px; }
+  .call-avatar { width: 115px; height: 115px; font-size: 43px; }
+  .call-buttons { margin-top: 30px; }
+  .video-card { min-height: 290px; }
+}
+</style>
+</head>
+
+<body>
+<div id="ambient">
+  <div class="ambient-glow glow-one"></div>
+  <div class="ambient-glow glow-two"></div>
+</div>
+
+<div class="progress">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="page-count" id="pageCount">01 / 07</div>
+
+<main id="app">
+
+  <!-- SCREEN 1 -->
+  <section class="screen active" data-page="0">
+    <div class="call-label">A MOMENT I WANT TO KEEP</div>
+
+    <div class="call-avatar">💜</div>
+
+    <h1 class="call-name">Sarauniya ta</h1>
+    <div class="call-subtitle">My one of one. My favourite person.</div>
+
+    <div class="call-buttons">
+      <button class="call-button decline" aria-label="Decline call">📞</button>
+      <button class="call-button accept" id="answerCall" aria-label="Answer call">📞</button>
+    </div>
+
+    <p style="font-size:13px; margin-top:35px; color:#b6a6c1;">
+      One video call.<br>
+      A thousand feelings I cannot explain.
+    </p>
+  </section>
+
+  <!-- SCREEN 2 -->
+  <section class="screen" data-page="1">
+    <div class="eyebrow">01 — The moment</div>
+
+    <h2>And then…<br><em>I saw you.</em></h2>
+
+    <div class="video-card">
+      <div class="video-top">
+        <span><span class="live-dot"></span>CONNECTED</span>
+        <span>MY FAVOURITE VIEW</span>
+      </div>
+
+      <div class="video-center">
+        <span class="video-heart">💗</span>
+        <h3>There you were.</h3>
+        <p>
+          A little shy.<br>
+          Covering your face.<br>
+          And me, smiling because somehow…<br>
+          <em>you were right there.</em>
+        </p>
+      </div>
+
+      <div class="video-bottom">
+        <span>HER VOICE ♡</span>
+        <div class="video-controls">
+          <span class="control">♡</span>
+          <span class="control">✧</span>
+          <span class="control">∞</span>
+        </div>
+        <span>MY HEART</span>
+      </div>
+    </div>
+
+    <p>
+      Mama, you thought you could hide that beautiful face from me? 😭😂
+      I still got to see you, and I was so happy.
+    </p>
+  </section>
+
+  <!-- SCREEN 3 -->
+  <section class="screen" data-page="2">
+    <div class="eyebrow">02 — What you do to me</div>
+
+    <h2>You make the<br><em>world feel softer.</em></h2>
+
+    <p style="margin-top:18px;">
+      Do you know what I feel when I talk to you, Mama?
+    </p>
+
+    <div class="memory-list">
+
+      <div class="memory">
+        <div class="memory-icon">🕊️</div>
+        <div>
+          <h3>Peace</h3>
+          <p>You calm my spirit. Talking to you makes my heart feel at ease.</p>
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-icon">💗</div>
+        <div>
+          <h3>Being loved</h3>
+          <p>You make me feel valued, appreciated, understood, and cared for.</p>
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-icon">☀️</div>
+        <div>
+          <h3>Pure happiness</h3>
+          <p>You can make an ordinary day feel precious just by being part of it.</p>
+        </div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-icon">🤍</div>
+        <div>
+          <h3>A love I treasure</h3>
+          <p>I don't take your kindness, support, faith, or the person you are for granted.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <p><em>You are so precious to me, Sarauniya.</em></p>
+  </section>
+
+  <!-- SCREEN 4 -->
+  <section class="screen" data-page="3">
+    <div class="eyebrow">03 — A thought that stayed</div>
+
+    <h2>I imagined<br><em>our ordinary.</em></h2>
+
+    <div class="future-card">
+      <span class="future-tag">SOMEDAY, INSHA'ALLAH</span>
+
+      <p style="font-size:19px; line-height:1.9;">
+        While we were talking, I imagined us living together after our Nikkah.
+      </p>
+
+      <div class="divider" style="margin-left:0;"></div>
+
+      <p>
+        Sitting in the same room.<br><br>
+        Looking at your face without a screen between us.<br><br>
+        Talking about our day.<br><br>
+        Laughing over the smallest things.<br><br>
+        Enjoying the simple blessing of being together.
+      </p>
+
+      <div class="divider" style="margin-left:0;"></div>
+
+      <p style="color:#f2b9d8;">
+        Nothing extraordinary happening outside.
+        Just me and my wife, grateful to Allah for the peace we share.
+      </p>
+    </div>
+
+    <p style="margin-top:24px;">
+      Mama… <em>I can't wait.</em> 💜
+    </p>
+  </section>
+
+  <!-- SCREEN 5 -->
+  <section class="screen" data-page="4">
+    <div class="eyebrow">04 — If I could tell you everything</div>
+
+    <h2>My letter<br><em>to my Queen.</em></h2>
+
+    <div class="letter">
+
+      <p>My Love, My Darling Zainab, My Hayati,</p>
+
+      <p>
+        Today reminded me again of how lucky I feel to have you in my life.
+        Allah has blessed me with someone so precious, and I pray I never
+        become careless with that blessing.
+      </p>
+
+      <p>
+        You are my Queen, my Sunshine, my Sunflower, my Rose, my Heartbeat,
+        my one of one, and the woman I hope to call my wife very soon,
+        insha'Allah.
+      </p>
+
+      <p>
+        You are beautiful, intelligent, thoughtful, hardworking, religious,
+        supportive, and precious to me in more ways than I can fit into one
+        letter. I admire your mind, your heart, your effort, and the way
+        you make me feel loved.
+      </p>
+
+      <p>
+        And today, seeing your face on that video call made me so happy.
+        Even with all that shyness and all that covering your face,
+        my baby girl. 😂💜 I saw you, Mama!
+      </p>
+
+      <p>
+        We talked, we shared a moment, and my mind wandered into the future
+        I keep praying for. I imagined the day when we can sit together,
+        talk face-to-face, laugh freely, and enjoy our time together as
+        husband and wife.
+      </p>
+
+      <p>
+        I know I cannot decide the timing of our Nikkah by myself.
+        That belongs to Allah. But I want you to know that my desire
+        for that future is sincere. I want to keep growing, preparing,
+        and doing my part while asking Allah to make the path easy for us.
+      </p>
+
+      <p>
+        I love you so much, Mama. Not only for how you make me feel,
+        but for the person you are. I want to keep learning how to love
+        you with patience, honesty, gentleness, responsibility, and mercy.
+      </p>
+
+      <p>
+        May Allah protect your heart, reward your efforts, ease whatever
+        is heavy on you, and fill your days with reasons to smile.
+        And may He allow us to experience the beautiful future we keep
+        making du'a for, if it is good for us.
+      </p>
+
+      <p>
+        Thank you for being you, my Queen.
+        Today's call was another little moment I will treasure.
+      </p>
+
+      <div class="signature">
+        Forever making du'a for us. 💜
+        <small>YOUR MUHAMMAD</small>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCREEN 6 -->
+  <section class="screen" data-page="5">
+    <div class="eyebrow">05 — What I ask Allah for</div>
+
+    <h2>More than a<br><em>beautiful love story.</em></h2>
+
+    <p style="margin-top:20px;">
+      I don't only want to be happy with you in this dunya.
+      I pray that our love helps us grow closer to Allah, too.
+    </p>
+
+    <div class="dua-card">
+      <div class="arabic">
+        رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا
+      </div>
+
+      <p class="dua-translation">
+        “Our Lord, grant us from among our spouses and offspring comfort
+        to our eyes and make us an example for the righteous.”
+      </p>
+
+      <p class="small" style="margin-top:18px;">
+        QUR'AN 25:74
+      </p>
+    </div>
+
+    <p>
+      May Allah grant us a blessed Nikkah, put barakah in our union,
+      make us garments of comfort for one another, and guide us toward
+      everything that pleases Him.
+    </p>
+
+    <p class="amen">Ameen, ya Rabb. 🤲🏽</p>
+  </section>
+
+  <!-- SCREEN 7 -->
+  <section class="screen" data-page="6">
+    <div class="eyebrow">Just one last thing</div>
+
+    <h2>To my wife<br><em>in my du'as.</em></h2>
+
+    <div class="final-heart">💜</div>
+
+    <p class="final-line">
+      My Queen.<br>
+      My Baby Girl.<br>
+      My Sarauniya ta.<br>
+      My Mrs Muhammad, insha'Allah.<br>
+      My Darling Zainab.<br>
+      My Hayati.
+    </p>
+
+    <div class="divider"></div>
+
+    <p>
+      Today, I saw your face.<br>
+      Today, I heard your voice.<br>
+      Today, I imagined our future again.
+    </p>
+
+    <p style="margin-top:22px;">
+      And today, I thanked Allah for you.
+    </p>
+
+    <p style="margin-top:25px; color:#f2b9d8; font-size:20px;">
+      I love you sooooooooo much, Mama. 💜
+    </p>
+
+    <p style="margin-top:15px; font-size:14px;">
+      You will always be someone very precious to my heart.
+    </p>
+
+    <div class="signature" style="text-align:center; margin-top:34px;">
+      Muhammad
+      <small>MADE WITH LOVE, JUST FOR YOU</small>
+    </div>
+
+    <button class="replay" onclick="restartExperience()">
+      ↺ RELIVE THIS LITTLE MOMENT
+    </button>
+  </section>
+
+</main>
+
+<div class="continue" id="continueBar">
+  <button class="next" id="nextButton">ANSWER THE CALL 💜</button>
+</div>
+
+<script>
+(function () {
+  const screens = Array.from(document.querySelectorAll(".screen"));
+  const nextButton = document.getElementById("nextButton");
+  const continueBar = document.getElementById("continueBar");
+  const progressFill = document.getElementById("progressFill");
+  const pageCount = document.getElementById("pageCount");
+  const answerCall = document.getElementById("answerCall");
+
+  let current = 0;
+  let busy = false;
+
+  const buttonLabels = [
+    "ANSWER THE CALL 💜",
+    "I'M SO HAPPY I SAW YOU →",
+    "YOU BRING ME PEACE →",
+    "IMAGINE WITH ME, MAMA →",
+    "READ MY HEART 💌",
+    "MAKE THIS DU'A WITH ME 🤲",
+    "KEEP THIS MOMENT CLOSE 💜"
+  ];
+
+  function showScreen(index) {
+    if (busy) return;
+    busy = true;
+
+    current = Math.max(0, Math.min(index, screens.length - 1));
+
+    screens.forEach((screen, i) => {
+      screen.classList.toggle("active", i === current);
+    });
+
+    pageCount.textContent =
+      String(current + 1).padStart(2, "0") +
+      " / " +
+      String(screens.length).padStart(2, "0");
+
+    progressFill.style.width =
+      ((current + 1) / screens.length * 100) + "%";
+
+    nextButton.textContent = buttonLabels[current];
+
+    if (current === screens.length - 1) {
+      continueBar.style.display = "none";
+    } else {
+      continueBar.style.display = "flex";
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    setTimeout(() => { busy = false; }, 450);
+  }
+
+  nextButton.addEventListener("click", () => {
+    if (current < screens.length - 1) {
+      showScreen(current + 1);
+    }
+  });
+
+  answerCall.addEventListener("click", () => {
+    showScreen(1);
+  });
+
+  window.restartExperience = function () {
+    showScreen(0);
+  };
+
+  // Allow gentle horizontal swipes to navigate.
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0].screenX;
+    touchStartY = event.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener("touchend", (event) => {
+    const dx = event.changedTouches[0].screenX - touchStartX;
+    const dy = event.changedTouches[0].screenY - touchStartY;
+
+    if (Math.abs(dx) > 85 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+      if (dx < 0 && current < screens.length - 1) {
+        showScreen(current + 1);
+      } else if (dx > 0 && current > 0) {
+        showScreen(current - 1);
+      }
+    }
+  }, { passive: true });
+
+  showScreen(0);
+})();
+</script>
+
+</body>
+</html>
